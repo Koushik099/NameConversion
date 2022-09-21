@@ -5,7 +5,9 @@ let applyMethod = () => {
   camelCase();
   pascalCase();
   snakeCase();
+  screamingSnakeCase();
   kebabCase();
+  screamingKebabCase();
 };
 
 btn.addEventListener("click", applyMethod);
@@ -56,6 +58,11 @@ let snakeCase = () => {
 let screamingSnakeCase = () => {
   let para = document.getElementById("screaming-snake-case");
   let input = inputValue.value;
+  let inputText = input
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    .map((s) => s.toLowerCase())
+    .join("_");
+  para.textContent = inputText.toUpperCase();
 };
 
 // kababcase
@@ -69,4 +76,16 @@ let kebabCase = () => {
     .toLowerCase();
 
   para.textContent = inputText;
+};
+
+let screamingKebabCase = () => {
+  let para = document.getElementById("screaming-kebab-case");
+  let input = inputValue.value;
+
+  let inputText = input
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .toLowerCase();
+
+  para.textContent = inputText.toUpperCase();
 };
